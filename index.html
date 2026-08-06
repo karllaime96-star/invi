@@ -2,7 +2,7 @@
 <html lang="es">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>Nuestra Boda - Kevin & Jhoselin</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -34,39 +34,41 @@
             color: var(--text-main);
             display: flex;
             justify-content: center;
-            align-items: center;
+            align-items: flex-start;
             min-height: 100vh;
-            padding: 20px;
         }
 
-        /* DISEÑO HORIZONTAL / LANDSCAPE */
-        .horizontal-container {
+        /* DISEÑO VERTICAL MÓVIL */
+        .mobile-container {
             width: 100%;
-            max-width: 950px;
+            max-width: 450px;
             background-color: var(--bg-color);
-            min-height: 550px;
+            min-height: 100vh;
             position: relative;
             box-shadow: 0 0 30px rgba(0,0,0,0.5);
-            border-radius: 15px;
-            overflow: hidden;
-            display: flex;
-            flex-direction: column;
+            overflow-x: hidden;
+            padding-bottom: 40px;
         }
 
         /* PANTALLA DE SOBRE ANIMADO */
         .envelope-screen {
-            position: absolute;
+            position: fixed;
             top: 0;
             left: 0;
+            right: 0;
+            bottom: 0;
             width: 100%;
-            height: 100%;
+            max-width: 450px;
+            margin: 0 auto;
+            height: 100vh;
             background-color: var(--bg-color);
             z-index: 100;
             display: flex;
             flex-direction: column;
             justify-content: center;
             align-items: center;
-            transition: opacity 1s ease 1.2s, visibility 1s ease 1.2s;
+            padding: 20px;
+            transition: opacity 0.8s ease 1s, visibility 0.8s ease 1s;
         }
 
         .envelope-screen.open-screen {
@@ -75,10 +77,18 @@
             pointer-events: none;
         }
 
+        .envelope-title {
+            font-family: 'Pinyon Script', cursive;
+            font-size: 3.5rem;
+            color: var(--primary);
+            margin-bottom: 30px;
+            text-align: center;
+        }
+
         .envelope-wrapper {
             position: relative;
-            width: 320px;
-            height: 200px;
+            width: 280px;
+            height: 180px;
             background-color: var(--envelope-bg);
             border-radius: 0 0 10px 10px;
             box-shadow: 0 15px 25px rgba(0,0,0,0.15);
@@ -92,9 +102,9 @@
             left: 0;
             width: 0;
             height: 0;
-            border-left: 160px solid transparent;
-            border-right: 160px solid transparent;
-            border-top: 110px solid var(--envelope-flap);
+            border-left: 140px solid transparent;
+            border-right: 140px solid transparent;
+            border-top: 100px solid var(--envelope-flap);
             transform-origin: top;
             transition: transform 0.8s ease;
             z-index: 3;
@@ -107,7 +117,7 @@
 
         .wax-seal {
             position: absolute;
-            top: 85px;
+            top: 75px;
             left: 50%;
             transform: translateX(-50%);
             width: 50px;
@@ -129,16 +139,8 @@
             transform: translateX(-50%) scale(0.5);
         }
 
-        .envelope-title {
-            font-family: 'Pinyon Script', cursive;
-            font-size: 3rem;
-            color: var(--primary);
-            margin-bottom: 20px;
-            text-align: center;
-        }
-
         .click-instruction {
-            margin-top: 30px;
+            margin-top: 35px;
             font-size: 0.75rem;
             letter-spacing: 2px;
             text-transform: uppercase;
@@ -152,34 +154,10 @@
             50% { transform: translateY(-5px); }
         }
 
-        /* ESTRUCTURA HORIZONTAL DE DOS COLUMNAS */
-        .main-layout {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            width: 100%;
-            height: 100%;
-            min-height: 550px;
-        }
-
-        .left-panel {
-            background: linear-gradient(135deg, rgba(255,255,255,0.9) 0%, rgba(245,242,235,0.8) 100%);
-            padding: 40px 30px;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
+        /* ENCABEZADO Y CONTENIDO */
+        .hero {
+            padding: 50px 20px 30px;
             text-align: center;
-            border-right: 1px solid var(--border-color);
-            position: relative;
-        }
-
-        .right-panel {
-            padding: 30px;
-            overflow-y: auto;
-            max-height: 550px;
-            display: flex;
-            flex-direction: column;
-            gap: 20px;
         }
 
         .subtitle-top {
@@ -187,15 +165,16 @@
             letter-spacing: 3px;
             text-transform: uppercase;
             color: var(--primary);
-            margin-bottom: 10px;
+            margin-bottom: 15px;
             font-weight: 500;
         }
 
         .names {
             font-family: 'Pinyon Script', cursive;
-            font-size: 3.2rem;
+            font-size: 3rem;
             color: var(--primary);
             line-height: 1.1;
+            margin: 5px 0;
         }
 
         .ampersand {
@@ -203,36 +182,38 @@
             font-style: italic;
             font-size: 1.8rem;
             color: var(--accent);
-            margin: 5px 0;
+            display: block;
+            margin: -5px 0;
         }
 
         .date-badge {
-            margin-top: 20px;
+            margin: 20px auto 0;
             font-family: 'Cormorant Garamond', serif;
             font-size: 1.3rem;
             letter-spacing: 2px;
             color: var(--primary-dark);
             border-top: 1px solid var(--accent);
             border-bottom: 1px solid var(--accent);
-            padding: 6px 0;
+            padding: 8px 0;
             width: 80%;
         }
 
+        /* SECCIONES Y TARJETAS */
         .countdown-container {
-            padding: 20px;
+            padding: 25px 20px;
             text-align: center;
             background-color: var(--card-bg);
-            border-radius: 12px;
+            margin: 20px;
+            border-radius: 15px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.03);
             border: 1px solid var(--border-color);
-            width: 100%;
-            margin-top: 25px;
         }
 
         .countdown-title {
             font-family: 'Cormorant Garamond', serif;
-            font-size: 1.1rem;
+            font-size: 1.2rem;
             color: var(--primary);
-            margin-bottom: 10px;
+            margin-bottom: 15px;
         }
 
         .timer {
@@ -247,64 +228,69 @@
         }
 
         .time-value {
-            font-size: 1.5rem;
+            font-size: 1.7rem;
             font-weight: 600;
             color: var(--primary);
             font-family: 'Cormorant Garamond', serif;
         }
 
         .time-label {
-            font-size: 0.6rem;
+            font-size: 0.65rem;
             text-transform: uppercase;
+            letter-spacing: 1px;
             color: var(--text-muted);
+            margin-top: 4px;
         }
 
         .section-card {
             background-color: var(--card-bg);
-            padding: 20px;
-            border-radius: 12px;
+            margin: 20px;
+            padding: 25px 20px;
+            border-radius: 15px;
             text-align: center;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.03);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.03);
             border: 1px solid var(--border-color);
         }
 
         .card-icon {
-            font-size: 1.6rem;
+            font-size: 1.8rem;
             color: var(--accent);
-            margin-bottom: 8px;
+            margin-bottom: 12px;
         }
 
         .card-title {
             font-family: 'Cormorant Garamond', serif;
-            font-size: 1.5rem;
+            font-size: 1.6rem;
             color: var(--primary);
-            margin-bottom: 6px;
+            margin-bottom: 8px;
         }
 
         .card-subtitle {
-            font-size: 0.9rem;
+            font-size: 0.95rem;
             font-weight: 600;
+            color: var(--text-main);
             margin-bottom: 6px;
         }
 
         .card-text {
-            font-size: 0.8rem;
+            font-size: 0.85rem;
             color: var(--text-muted);
             line-height: 1.5;
-            margin-bottom: 15px;
+            margin-bottom: 18px;
         }
 
+        /* BOTONES */
         .btn {
             display: inline-flex;
             align-items: center;
             justify-content: center;
-            gap: 8px;
+            gap: 10px;
             width: 100%;
-            padding: 12px 15px;
+            padding: 14px 20px;
             background-color: var(--primary);
             color: #ffffff;
             text-decoration: none;
-            border-radius: 25px;
+            border-radius: 30px;
             font-size: 0.8rem;
             font-weight: 500;
             letter-spacing: 1px;
@@ -322,38 +308,42 @@
 
         .music-btn {
             position: fixed;
-            bottom: 25px;
-            right: 25px;
-            width: 45px;
-            height: 45px;
+            bottom: 20px;
+            right: 20px;
+            width: 48px;
+            height: 48px;
             background-color: var(--primary);
             color: white;
             border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
             cursor: pointer;
             z-index: 99;
             border: 2px solid #ffffff;
         }
 
-        /* Adaptabilidad para móviles */
-        @media (max-width: 768px) {
-            .main-layout {
-                grid-template-columns: 1fr;
-            }
-            .right-panel {
-                max-height: none;
-            }
+        .footer {
+            text-align: center;
+            padding: 30px 20px 10px;
+            color: var(--text-muted);
+            font-size: 0.8rem;
+        }
+
+        .footer-names {
+            font-family: 'Pinyon Script', cursive;
+            font-size: 2.2rem;
+            color: var(--primary);
+            margin-top: 5px;
         }
     </style>
 </head>
 <body>
 
-    <div class="horizontal-container">
+    <div class="mobile-container">
         
-        <!-- PANTALLA INICIAL DE SOBRE -->
+        <!-- PANTALLA INICIAL DEL SOBRE -->
         <div class="envelope-screen" id="envelopeScreen">
             <h2 class="envelope-title">¡Nos casamos!</h2>
             <div class="envelope-wrapper" id="envelope">
@@ -365,7 +355,7 @@
             <p class="click-instruction">Hacé click para abrir la invitación</p>
         </div>
 
-        <!-- BOTÓN DE MÚSICA -->
+        <!-- REPRODUCTOR DE MÚSICA -->
         <div class="music-btn" id="musicToggle">
             <i class="fas fa-music" id="musicIcon"></i>
         </div>
@@ -373,82 +363,82 @@
             <source src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3" type="audio/mpeg">
         </audio>
 
-        <!-- LAYOUT HORIZONTAL DE DOS COLUMNAS -->
-        <div class="main-layout">
-            
-            <!-- COLUMNA IZQUIERDA (PORTADA Y CONTADOR) -->
-            <div class="left-panel">
-                <div class="subtitle-top">¡Nos Casamos!</div>
-                <h1 class="names">Kevin Rojas Laime</h1>
-                <span class="ampersand">&</span>
-                <h1 class="names">Jhoselin Ferrel Rioja</h1>
-                <div class="date-badge">18 . 10 . 2026</div>
+        <!-- ENCABEZADO PRINCIPAL -->
+        <header class="hero">
+            <div class="subtitle-top">¡Nos Casamos!</div>
+            <h1 class="names">Kevin Rojas Laime</h1>
+            <span class="ampersand">&</span>
+            <h1 class="names">Jhoselin Ferrel Rioja</h1>
+            <div class="date-badge">18 . 10 . 2026</div>
+        </header>
 
-                <div class="countdown-container">
-                    <div class="countdown-title">Faltan tan solo...</div>
-                    <div class="timer">
-                        <div class="time-box">
-                            <span class="time-value" id="days">00</span>
-                            <span class="time-label">Días</span>
-                        </div>
-                        <div class="time-box">
-                            <span class="time-value" id="hours">00</span>
-                            <span class="time-label">Hs</span>
-                        </div>
-                        <div class="time-box">
-                            <span class="time-value" id="minutes">00</span>
-                            <span class="time-label">Min</span>
-                        </div>
-                        <div class="time-box">
-                            <span class="time-value" id="seconds">00</span>
-                            <span class="time-label">Seg</span>
-                        </div>
-                    </div>
+        <!-- CONTADOR REGRESIVO -->
+        <div class="countdown-container">
+            <div class="countdown-title">Faltan tan solo...</div>
+            <div class="timer">
+                <div class="time-box">
+                    <span class="time-value" id="days">00</span>
+                    <span class="time-label">Días</span>
+                </div>
+                <div class="time-box">
+                    <span class="time-value" id="hours">00</span>
+                    <span class="time-label">Hs</span>
+                </div>
+                <div class="time-box">
+                    <span class="time-value" id="minutes">00</span>
+                    <span class="time-label">Min</span>
+                </div>
+                <div class="time-box">
+                    <span class="time-value" id="seconds">00</span>
+                    <span class="time-label">Seg</span>
                 </div>
             </div>
-
-            <!-- COLUMNA DERECHA (UBICACIÓN, CALENDARIO Y RSVP) -->
-            <div class="right-panel">
-                
-                <div class="section-card">
-                    <i class="fas fa-church card-icon"></i>
-                    <h2 class="card-title">Ceremonia & Fiesta</h2>
-                    <div class="card-subtitle">Estancia Las Lomas</div>
-                    <p class="card-text">
-                        <strong>Hora:</strong> 17:00 Hs<br>
-                        <strong>Dirección:</strong> Av. Principal 1234, Buenos Aires
-                    </p>
-                    <a href="https://maps.google.com" target="_blank" class="btn">
-                        <i class="fas fa-map-marker-alt"></i> Ver Ubicación
-                    </a>
-                </div>
-
-                <div class="section-card">
-                    <i class="far fa-calendar-check card-icon"></i>
-                    <h2 class="card-title">Agendar Fecha</h2>
-                    <p class="card-text">Guarda esta fecha especial en tu calendario.</p>
-                    <a href="https://calendar.google.com/calendar/render?action=TEMPLATE&text=Boda+Kevin+y+Jhoselin&dates=20261018T200000Z/20261019T030000Z&details=¡Nos+casamos!&location=Estancia+Las+Lomas" target="_blank" class="btn btn-outline">
-                        <i class="far fa-calendar-plus"></i> Agendar en Google Calendar
-                    </a>
-                </div>
-
-                <div class="section-card">
-                    <i class="fab fa-whatsapp card-icon"></i>
-                    <h2 class="card-title">Confirmación de Asistencia</h2>
-                    <p class="card-text">Por favor confirma tu presencia antes del 15 de Septiembre.</p>
-                    <a href="https://wa.me/5491112345678?text=¡Hola!%20Quiero%20confirmar%20mi%20asistencia%20a%20la%20boda%20de%20Kevin%20y%20Jhoselin." target="_blank" class="btn">
-                        <i class="fab fa-whatsapp"></i> Confirmar por WhatsApp
-                    </a>
-                </div>
-
-            </div>
-
         </div>
+
+        <!-- UBICACIÓN -->
+        <div class="section-card">
+            <i class="fas fa-church card-icon"></i>
+            <h2 class="card-title">Ceremonia & Fiesta</h2>
+            <div class="card-subtitle">Estancia Las Lomas</div>
+            <p class="card-text">
+                <strong>Hora:</strong> 17:00 Hs<br>
+                <strong>Dirección:</strong> Av. Principal 1234, Buenos Aires
+            </p>
+            <a href="https://maps.google.com" target="_blank" class="btn">
+                <i class="fas fa-map-marker-alt"></i> Ver Ubicación
+            </a>
+        </div>
+
+        <!-- AGENDAR FECHA -->
+        <div class="section-card">
+            <i class="far fa-calendar-check card-icon"></i>
+            <h2 class="card-title">Agendar Fecha</h2>
+            <p class="card-text">Guarda esta fecha especial en tu calendario.</p>
+            <a href="https://calendar.google.com/calendar/render?action=TEMPLATE&text=Boda+Kevin+y+Jhoselin&dates=20261018T200000Z/20261019T030000Z&details=¡Nos+casamos!&location=Estancia+Las+Lomas" target="_blank" class="btn btn-outline">
+                <i class="far fa-calendar-plus"></i> Agendar en Google Calendar
+            </a>
+        </div>
+
+        <!-- RSVP WHATSAPP -->
+        <div class="section-card">
+            <i class="fab fa-whatsapp card-icon"></i>
+            <h2 class="card-title">Confirmación de Asistencia</h2>
+            <p class="card-text">Por favor confirma tu presencia antes del 15 de Septiembre.</p>
+            <a href="https://wa.me/5491112345678?text=¡Hola!%20Quiero%20confirmar%20mi%20asistencia%20a%20la%20boda%20de%20Kevin%20y%20Jhoselin." target="_blank" class="btn">
+                <i class="fab fa-whatsapp"></i> Confirmar por WhatsApp
+            </a>
+        </div>
+
+        <!-- PIE DE PÁGINA -->
+        <footer class="footer">
+            <p>¡Esperamos compartir este día tan especial contigo!</p>
+            <div class="footer-names">Kevin & Jhoselin</div>
+        </footer>
 
     </div>
 
     <script>
-        // APERTURA DEL SOBRE
+        // LÓGICA SOBRE ANIMADO
         const envelopeScreen = document.getElementById("envelopeScreen");
         const envelope = document.getElementById("envelope");
         const bgMusic = document.getElementById("bgMusic");
