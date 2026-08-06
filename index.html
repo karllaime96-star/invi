@@ -1,0 +1,510 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nuestra Boda - Invitación Digital</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400&family=Montserrat:wght@300;400;500;600&family=Pinyon+Script&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary: #4a5d4e;
+            --primary-dark: #354338;
+            --accent: #c5a059;
+            --bg-color: #faf8f5;
+            --card-bg: #ffffff;
+            --text-main: #333333;
+            --text-muted: #666666;
+            --border-color: #e2ded4;
+            --envelope-bg: #a3b19b;
+            --envelope-flap: #8f9e87;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Montserrat', sans-serif;
+            background-color: #111;
+            color: var(--text-main);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+
+        .mobile-container {
+            width: 100%;
+            max-width: 450px;
+            background-color: var(--bg-color);
+            min-height: 100vh;
+            position: relative;
+            box-shadow: 0 0 30px rgba(0,0,0,0.5);
+            overflow: hidden;
+        }
+
+        /* --- PANTALLA DE SOBRE ANIMADO --- */
+        .envelope-screen {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: var(--bg-color);
+            z-index: 100;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            transition: opacity 1s ease 1.2s, visibility 1s ease 1.2s;
+        }
+
+        .envelope-screen.open-screen {
+            opacity: 0;
+            visibility: hidden;
+            pointer-events: none;
+        }
+
+        .envelope-wrapper {
+            position: relative;
+            width: 300px;
+            height: 200px;
+            background-color: var(--envelope-bg);
+            border-radius: 0 0 10px 10px;
+            box-shadow: 0 15px 25px rgba(0,0,0,0.15);
+            cursor: pointer;
+            perspective: 800px;
+        }
+
+        /* Solapa superior del sobre */
+        .envelope-flap {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 0;
+            height: 0;
+            border-left: 150px solid transparent;
+            border-right: 150px solid transparent;
+            border-top: 110px solid var(--envelope-flap);
+            transform-origin: top;
+            transition: transform 0.8s ease;
+            z-index: 3;
+        }
+
+        .envelope-wrapper.open .envelope-flap {
+            transform: rotateX(180deg);
+            z-index: 1;
+        }
+
+        /* Sello de Cera */
+        .wax-seal {
+            position: absolute;
+            top: 85px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 50px;
+            height: 50px;
+            background: radial-gradient(circle, #d4af37 0%, #a27c1e 100%);
+            border-radius: 50%;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.3);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #5c4308;
+            font-size: 1.2rem;
+            z-index: 4;
+            transition: transform 0.4s ease, opacity 0.4s ease;
+        }
+
+        .envelope-wrapper.open .wax-seal {
+            opacity: 0;
+            transform: translateX(-50%) scale(0.5);
+        }
+
+        .envelope-title {
+            font-family: 'Pinyon Script', cursive;
+            font-size: 3rem;
+            color: var(--primary);
+            margin-bottom: 25px;
+            text-align: center;
+        }
+
+        .click-instruction {
+            margin-top: 35px;
+            font-size: 0.75rem;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            color: var(--primary);
+            font-weight: 600;
+            animation: bounce 1.5s infinite;
+        }
+
+        @keyframes bounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-5px); }
+        }
+
+        /* --- BOTANICAL DECORATIONS --- */
+        .botanical-leaf {
+            position: absolute;
+            width: 120px;
+            opacity: 0.6;
+            pointer-events: none;
+            z-index: 1;
+        }
+
+        .top-left { top: -20px; left: -30px; transform: rotate(15deg); }
+        .top-right { top: -20px; right: -30px; transform: scaleX(-1) rotate(15deg); }
+
+        /* --- HEADER & CARDS --- */
+        .hero {
+            padding: 60px 20px 40px;
+            text-align: center;
+            position: relative;
+        }
+
+        .subtitle-top {
+            font-size: 0.85rem;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            color: var(--primary);
+            margin-bottom: 15px;
+            font-weight: 500;
+        }
+
+        .names {
+            font-family: 'Pinyon Script', cursive;
+            font-size: 3.8rem;
+            color: var(--primary);
+            line-height: 1.1;
+            margin: 10px 0;
+        }
+
+        .ampersand {
+            font-family: 'Cormorant Garamond', serif;
+            font-style: italic;
+            font-size: 2rem;
+            color: var(--accent);
+            display: block;
+            margin: -5px 0;
+        }
+
+        .date-badge {
+            margin-top: 25px;
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.4rem;
+            letter-spacing: 2px;
+            color: var(--primary-dark);
+            border-top: 1px solid var(--accent);
+            border-bottom: 1px solid var(--accent);
+            padding: 8px 0;
+            display: inline-block;
+            width: 80%;
+        }
+
+        .countdown-container {
+            padding: 30px 20px;
+            text-align: center;
+            background-color: var(--card-bg);
+            margin: 20px;
+            border-radius: 15px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.03);
+            border: 1px solid var(--border-color);
+        }
+
+        .countdown-title {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.3rem;
+            color: var(--primary);
+            margin-bottom: 20px;
+        }
+
+        .timer {
+            display: flex;
+            justify-content: space-around;
+        }
+
+        .time-box {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .time-value {
+            font-size: 1.8rem;
+            font-weight: 600;
+            color: var(--primary);
+            font-family: 'Cormorant Garamond', serif;
+        }
+
+        .time-label {
+            font-size: 0.65rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: var(--text-muted);
+            margin-top: 4px;
+        }
+
+        .section-card {
+            background-color: var(--card-bg);
+            margin: 25px 20px;
+            padding: 30px 20px;
+            border-radius: 15px;
+            text-align: center;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.03);
+            border: 1px solid var(--border-color);
+        }
+
+        .card-icon {
+            font-size: 2rem;
+            color: var(--accent);
+            margin-bottom: 15px;
+        }
+
+        .card-title {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.8rem;
+            color: var(--primary);
+            margin-bottom: 10px;
+        }
+
+        .card-subtitle {
+            font-size: 1rem;
+            font-weight: 600;
+            color: var(--text-main);
+            margin-bottom: 8px;
+        }
+
+        .card-text {
+            font-size: 0.85rem;
+            color: var(--text-muted);
+            line-height: 1.6;
+            margin-bottom: 20px;
+        }
+
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            width: 100%;
+            padding: 14px 20px;
+            background-color: var(--primary);
+            color: #ffffff;
+            text-decoration: none;
+            border-radius: 30px;
+            font-size: 0.85rem;
+            font-weight: 500;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            transition: all 0.3s ease;
+            border: none;
+            cursor: pointer;
+        }
+
+        .btn-outline {
+            background-color: transparent;
+            color: var(--primary);
+            border: 1px solid var(--primary);
+        }
+
+        .music-btn {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            width: 50px;
+            height: 50px;
+            background-color: var(--primary);
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+            cursor: pointer;
+            z-index: 99;
+            border: 2px solid #ffffff;
+        }
+
+        .footer {
+            text-align: center;
+            padding: 40px 20px;
+            color: var(--text-muted);
+            font-size: 0.8rem;
+        }
+
+        .footer-names {
+            font-family: 'Pinyon Script', cursive;
+            font-size: 2rem;
+            color: var(--primary);
+            margin-top: 5px;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="mobile-container">
+        
+        <!-- PANTALLA INICIAL DE SOBRE -->
+        <div class="envelope-screen" id="envelopeScreen">
+            <h2 class="envelope-title">¡Nos casamos!</h2>
+            <div class="envelope-wrapper" id="envelope">
+                <div class="envelope-flap"></div>
+                <div class="wax-seal">
+                    <i class="fas fa-stamp"></i>
+                </div>
+            </div>
+            <p class="click-instruction">Hacé click para abrir la invitación</p>
+        </div>
+
+        <!-- HOJAS BOTÁNICAS -->
+        <svg class="botanical-leaf top-left" viewBox="0 0 100 100" fill="#4a5d4e">
+            <path d="M10,90 Q30,40 80,10 Q50,50 10,90 Z" />
+            <path d="M25,70 Q45,30 90,20 Q60,50 25,70 Z" opacity="0.6"/>
+        </svg>
+        <svg class="botanical-leaf top-right" viewBox="0 0 100 100" fill="#4a5d4e">
+            <path d="M10,90 Q30,40 80,10 Q50,50 10,90 Z" />
+            <path d="M25,70 Q45,30 90,20 Q60,50 25,70 Z" opacity="0.6"/>
+        </svg>
+
+        <!-- BOTÓN DE MÚSICA -->
+        <div class="music-btn" id="musicToggle">
+            <i class="fas fa-music" id="musicIcon"></i>
+        </div>
+        <audio id="bgMusic" loop>
+            <source src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3" type="audio/mpeg">
+        </audio>
+
+        <!-- CONTENIDO PRINCIPAL DE LA INVITACIÓN -->
+        <header class="hero">
+            <div class="subtitle-top">¡Nos Casamos!</div>
+            <h1 class="names">Sofía</h1>
+            <span class="ampersand">&</span>
+            <h1 class="names">Mateo</h1>
+            <div class="date-badge">18 . 10 . 2026</div>
+        </header>
+
+        <div class="countdown-container">
+            <div class="countdown-title">Faltan tan solo...</div>
+            <div class="timer">
+                <div class="time-box">
+                    <span class="time-value" id="days">00</span>
+                    <span class="time-label">Días</span>
+                </div>
+                <div class="time-box">
+                    <span class="time-value" id="hours">00</span>
+                    <span class="time-label">Hs</span>
+                </div>
+                <div class="time-box">
+                    <span class="time-value" id="minutes">00</span>
+                    <span class="time-label">Min</span>
+                </div>
+                <div class="time-box">
+                    <span class="time-value" id="seconds">00</span>
+                    <span class="time-label">Seg</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="section-card">
+            <i class="fas fa-church card-icon"></i>
+            <h2 class="card-title">Ceremonia & Fiesta</h2>
+            <div class="card-subtitle">Estancia Las Lomas</div>
+            <p class="card-text">
+                <strong>Hora:</strong> 17:00 Hs<br>
+                <strong>Dirección:</strong> Av. Principal 1234, Buenos Aires
+            </p>
+            <a href="https://maps.google.com" target="_blank" class="btn">
+                <i class="fas fa-map-marker-alt"></i> Ver Ubicación
+            </a>
+        </div>
+
+        <div class="section-card">
+            <i class="far fa-calendar-check card-icon"></i>
+            <h2 class="card-title">Agendar Fecha</h2>
+            <p class="card-text">Guarda esta fecha especial en tu calendario para que no te la pierdas.</p>
+            <a href="https://calendar.google.com/calendar/render?action=TEMPLATE&text=Boda+Sofia+y+Mateo&dates=20261018T200000Z/20261019T030000Z&details=¡Nos+casamos!&location=Estancia+Las+Lomas" target="_blank" class="btn btn-outline">
+                <i class="far fa-calendar-plus"></i> Agendar en Google Calendar
+            </a>
+        </div>
+
+        <div class="section-card">
+            <i class="fab fa-whatsapp card-icon"></i>
+            <h2 class="card-title">Confirmación de Asistencia</h2>
+            <p class="card-text">Por favor confirma tu presencia antes del 15 de Septiembre.</p>
+            <a href="https://wa.me/5491112345678?text=¡Hola!%20Quiero%20confirmar%20mi%20asistencia%20a%20la%20boda." target="_blank" class="btn">
+                <i class="fab fa-whatsapp"></i> Confirmar por WhatsApp
+            </a>
+        </div>
+
+        <footer class="footer">
+            <p>¡Esperamos compartir este día tan especial contigo!</p>
+            <div class="footer-names">Sofía & Mateo</div>
+        </footer>
+
+    </div>
+
+    <script>
+        // LÓGICA APERTURA DE SOBRE
+        const envelopeScreen = document.getElementById("envelopeScreen");
+        const envelope = document.getElementById("envelope");
+        const bgMusic = document.getElementById("bgMusic");
+        const musicIcon = document.getElementById("musicIcon");
+        const musicToggle = document.getElementById("musicToggle");
+        let isPlaying = false;
+
+        envelopeScreen.addEventListener("click", () => {
+            envelope.classList.add("open");
+            envelopeScreen.classList.add("open-screen");
+            
+            // Inicia la música automáticamente al abrir
+            bgMusic.play().then(() => {
+                isPlaying = true;
+                musicIcon.className = "fas fa-pause";
+            }).catch(e => console.log("Audio autostart blocked"));
+        });
+
+        // CONTROL DE MÚSICA
+        musicToggle.addEventListener("click", (e) => {
+            e.stopPropagation();
+            if (isPlaying) {
+                bgMusic.pause();
+                musicIcon.className = "fas fa-music";
+            } else {
+                bgMusic.play();
+                musicIcon.className = "fas fa-pause";
+            }
+            isPlaying = !isPlaying;
+        });
+
+        // CONTADOR REGRESIVO
+        const targetDate = new Date("October 18, 2026 17:00:00").getTime();
+
+        function updateCountdown() {
+            const now = new Date().getTime();
+            const difference = targetDate - now;
+
+            if (difference > 0) {
+                const days = Math.floor(difference / (1000 * 60 * 60 * 24));
+                const hours = Math.floor((difference % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+                const minutes = Math.floor((difference % (1000 * 60 * 60)) / (1000 * 60));
+                const seconds = Math.floor((difference % (1000 * 60)) / 1000);
+
+                document.getElementById("days").innerText = days < 10 ? "0" + days : days;
+                document.getElementById("hours").innerText = hours < 10 ? "0" + hours : hours;
+                document.getElementById("minutes").innerText = minutes < 10 ? "0" + minutes : minutes;
+                document.getElementById("seconds").innerText = seconds < 10 ? "0" + seconds : seconds;
+            }
+        }
+
+        setInterval(updateCountdown, 1000);
+        updateCountdown();
+    </script>
+</body>
+</html>
