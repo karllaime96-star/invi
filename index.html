@@ -6,7 +6,7 @@
     <title>Nuestra Boda - Kevin & Jhoselin</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400&family=Montserrat:wght@300;400;500;600&family=Pinyon+Script&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400;1,600&family=Montserrat:wght@300;400;500;600&family=Pinyon+Script&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         :root {
@@ -261,6 +261,39 @@
             margin-bottom: 18px;
         }
 
+        /* --- ESTILOS DE LA SECCIÓN ESPIRITUAL --- */
+        .spiritual-img {
+            width: 100%;
+            border-radius: 12px;
+            margin-bottom: 15px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+        }
+
+        .bible-quote {
+            font-family: 'Cormorant Garamond', serif;
+            font-style: italic;
+            font-size: 1.05rem;
+            color: var(--primary-dark);
+            line-height: 1.5;
+            margin-bottom: 15px;
+            padding: 0 10px;
+        }
+
+        .verse-ref {
+            font-style: normal;
+            font-weight: 600;
+            color: var(--accent);
+            display: block;
+            margin-top: 5px;
+        }
+
+        .invitation-text {
+            font-size: 0.82rem;
+            color: var(--text-muted);
+            line-height: 1.6;
+            margin-bottom: 12px;
+        }
+
         .btn {
             display: inline-flex;
             align-items: center;
@@ -398,14 +431,26 @@
             </a>
         </div>
 
-        <!-- RSVP WHATSAPP -->
+        <!-- IMAGEN CORDÓN DE TRES DOBLECES Y MENSAJE ESPIRITUAL -->
         <div class="section-card">
-            <i class="fab fa-whatsapp card-icon"></i>
-            <h2 class="card-title">Confirmación de Asistencia</h2>
-            <p class="card-text">Por favor confirma tu presencia con anticipación.</p>
-            <a href="https://wa.me/5491112345678?text=¡Hola!%20Quiero%20confirmar%20mi%20asistencia%20a%20la%20boda%20de%20Kevin%20y%20Jhoselin." target="_blank" class="btn">
-                <i class="fab fa-whatsapp"></i> Confirmar por WhatsApp
-            </a>
+            <img src="cordon.jpg" alt="Un cordón de tres dobleces" class="spiritual-img">
+            
+            <p class="bible-quote">
+                “Así que no son ya más dos, sino una sola carne; por tanto, lo que Dios juntó, no lo separe el hombre.”
+                <span class="verse-ref">— Mateo 19:6</span>
+            </p>
+
+            <p class="invitation-text">
+                Ante Dios y con la bendición de nuestros padres, tenemos el honor de invitarte a la celebración de nuestro enlace matrimonial.
+            </p>
+
+            <p class="invitation-text">
+                Decidimos unir nuestras vidas bajo la guía de la palabra del Señor, y nos complacería enormemente contar con tu presencia y tus oraciones en este día tan significativo para nosotros.
+            </p>
+
+            <p class="invitation-text">
+                <strong>Te esperamos para compartir la alegría del inicio de nuestra nueva vida juntos.</strong>
+            </p>
         </div>
 
         <footer class="footer">
