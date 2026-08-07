@@ -333,23 +333,25 @@
             <p class="click-text" id="clickText">Toca para abrir la invitación</p>
         </div>
 
-        <!-- REPRODUCTOR DE MÚSICA -->
+        <!-- REPRODUCTOR DE MÚSICA LOCAL -->
         <div class="music-btn" id="musicToggle">
             <i class="fas fa-music" id="musicIcon"></i>
         </div>
-        <source src="cancion.mp3" type="audio/mpeg">
+        <audio id="bgMusic" loop>
+            <source src="cancion.mp3" type="audio/mpeg">
+        </audio>
 
         <!-- ENCABEZADO CON ANIMACIÓN SECUENCIAL -->
         <header class="hero">
             <div class="subtitle-top fade-in-element delay-1">Sé parte de nuestra historia</div>
-            <div class="subtitle-top fade-in-element delay-2">¡ N O S     C A S A M O S !</div>
+            <div class="subtitle-top fade-in-element delay-2">¡ N O S   C A S A M O S !</div>
             <h1 class="names fade-in-element delay-3">Kevin Rojas Laime</h1>
             <span class="ampersand fade-in-element delay-3">&</span>
             <h1 class="names fade-in-element delay-4">Jhoselin Ferrel Rioja</h1>
-            <div class="date-badge fade-in-element delay-5"> 09. 01 . 2027</div>
+            <div class="date-badge fade-in-element delay-5">09 . 01 . 2027</div>
         </header>
 
-        <!-- CONTADOR REGRESIVO -->
+        <!-- CONTADOR REGRESIVO A ENERO 9, 2027 (13:00 HS) -->
         <div class="countdown-container fade-in-element delay-5">
             <div class="countdown-title">Faltan tan solo...</div>
             <div class="timer">
@@ -372,26 +374,26 @@
             </div>
         </div>
 
-        <!-- UBICACIÓN -->
+        <!-- UBICACIÓN ACTUALIZADA -->
         <div class="section-card">
             <i class="fas fa-church card-icon"></i>
             <h2 class="card-title">Ceremonia</h2>
-            <div class="card-subtitle">Tabernaculo de vida. IPUACO</div>
+            <div class="card-subtitle">Tabernáculo de vida - IPUACO</div>
             <p class="card-text">
                 <strong>Hora:</strong> 13:00 Hs<br>
-                <strong>Dirección:</strong> B°. Patagonia, Caleta Olivia
+                <strong>Lugar:</strong> Barrio Patagonia, Caleta Olivia
             </p>
-            <a href="https://maps.google.com" target="_blank" class="btn">
-                <i class="fas fa-map-marker-alt"></i> Ver Ubicación
+            <a href="https://www.google.com/maps/search/?api=1&query=Tabernaculo+de+vida+IPUACO+barrio+Patagonia+Caleta+Olivia" target="_blank" class="btn">
+                <i class="fas fa-map-marker-alt"></i> Ver Ubicación en Maps
             </a>
         </div>
 
-        <!-- AGENDAR FECHA -->
+        <!-- AGENDAR EN GOOGLE CALENDAR -->
         <div class="section-card">
             <i class="far fa-calendar-check card-icon"></i>
             <h2 class="card-title">Agendar Fecha</h2>
             <p class="card-text">Guarda esta fecha especial en tu calendario.</p>
-            <a href="https://calendar.google.com/calendar/render?action=TEMPLATE&text=Boda+Kevin+y+Jhoselin&dates=20261018T200000Z/20261019T030000Z&details=¡Nos+casamos!&location=Estancia+Las+Lomas" target="_blank" class="btn btn-outline">
+            <a href="https://calendar.google.com/calendar/render?action=TEMPLATE&text=Boda+Kevin+y+Jhoselin&dates=20270109T160000Z/20270109T230000Z&details=¡Nos+casamos!+Ceremonia+en+Tabernáculo+de+vida+-+IPUACO&location=Barrio+Patagonia,+Caleta+Olivia" target="_blank" class="btn btn-outline">
                 <i class="far fa-calendar-plus"></i> Agendar en Google Calendar
             </a>
         </div>
@@ -400,7 +402,7 @@
         <div class="section-card">
             <i class="fab fa-whatsapp card-icon"></i>
             <h2 class="card-title">Confirmación de Asistencia</h2>
-            <p class="card-text">Por favor confirma tu presencia antes del 15 de Septiembre.</p>
+            <p class="card-text">Por favor confirma tu presencia con anticipación.</p>
             <a href="https://wa.me/5491112345678?text=¡Hola!%20Quiero%20confirmar%20mi%20asistencia%20a%20la%20boda%20de%20Kevin%20y%20Jhoselin." target="_blank" class="btn">
                 <i class="fab fa-whatsapp"></i> Confirmar por WhatsApp
             </a>
@@ -422,17 +424,14 @@
         let isPlaying = false;
 
         envelopeScreen.addEventListener("click", () => {
-            // 1. Abrir sobre
             envelopeScreen.classList.add("opened");
             clickText.style.opacity = "0";
 
-            // 2. Reproducir música
             bgMusic.play().then(() => {
                 isPlaying = true;
                 musicIcon.className = "fas fa-pause";
             }).catch(e => console.log("Audio autostart blocked"));
 
-            // 3. Ocultar sobre y activar la animación secuencial de las letras
             setTimeout(() => {
                 envelopeScreen.classList.add("hide");
                 document.body.classList.add("animated");
@@ -451,7 +450,8 @@
             isPlaying = !isPlaying;
         });
 
-        const targetDate = new Date("Enero 9, 2027 13:00:00").getTime();
+        // CONFIGURACIÓN DE LA FECHA: 09 de Enero de 2027 - 13:00 Hs
+        const targetDate = new Date("January 9, 2027 13:00:00").getTime();
 
         function updateCountdown() {
             const now = new Date().getTime();
