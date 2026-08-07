@@ -18,8 +18,6 @@
             --text-main: #333333;
             --text-muted: #666666;
             --border-color: #e2ded4;
-            --envelope-bg: #a3b19b;
-            --envelope-flap: #8f9e87;
         }
 
         * {
@@ -38,7 +36,6 @@
             min-height: 100vh;
         }
 
-        /* DISEÑO VERTICAL MÓVIL */
         .mobile-container {
             width: 100%;
             max-width: 450px;
@@ -50,7 +47,7 @@
             padding-bottom: 40px;
         }
 
-        /* PANTALLA DE SOBRE ANIMADO */
+        /* --- PANTALLA INICIAL DEL SOBRE --- */
         .envelope-screen {
             position: fixed;
             top: 0;
@@ -61,100 +58,68 @@
             max-width: 450px;
             margin: 0 auto;
             height: 100vh;
-            background-color: var(--bg-color);
+            background-color: #f4f3ef;
             z-index: 100;
             display: flex;
             flex-direction: column;
             justify-content: center;
             align-items: center;
-            padding: 20px;
-            transition: opacity 0.8s ease 1s, visibility 0.8s ease 1s;
+            cursor: pointer;
+            transition: opacity 1s ease, visibility 1s ease;
         }
 
-        .envelope-screen.open-screen {
+        .envelope-screen.hide {
             opacity: 0;
             visibility: hidden;
             pointer-events: none;
         }
 
-        .envelope-title {
-            font-family: 'Pinyon Script', cursive;
-            font-size: 3.5rem;
-            color: var(--primary);
-            margin-bottom: 30px;
-            text-align: center;
-        }
-
-        .envelope-wrapper {
+        .envelope-box {
             position: relative;
-            width: 280px;
-            height: 180px;
-            background-color: var(--envelope-bg);
-            border-radius: 0 0 10px 10px;
-            box-shadow: 0 15px 25px rgba(0,0,0,0.15);
-            cursor: pointer;
-            perspective: 800px;
+            width: 90%;
+            max-width: 380px;
+            aspect-ratio: 1 / 1;
         }
 
-        .envelope-flap {
+        .envelope-img {
             position: absolute;
             top: 0;
             left: 0;
-            width: 0;
-            height: 0;
-            border-left: 140px solid transparent;
-            border-right: 140px solid transparent;
-            border-top: 100px solid var(--envelope-flap);
-            transform-origin: top;
-            transition: transform 0.8s ease;
-            z-index: 3;
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+            transition: opacity 0.5s ease;
         }
 
-        .envelope-wrapper.open .envelope-flap {
-            transform: rotateX(180deg);
-            z-index: 1;
-        }
-
-        .wax-seal {
-            position: absolute;
-            top: 75px;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 50px;
-            height: 50px;
-            background: radial-gradient(circle, #d4af37 0%, #a27c1e 100%);
-            border-radius: 50%;
-            box-shadow: 0 4px 8px rgba(0,0,0,0.3);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: #5c4308;
-            font-size: 1.2rem;
-            z-index: 4;
-            transition: transform 0.4s ease, opacity 0.4s ease;
-        }
-
-        .envelope-wrapper.open .wax-seal {
+        .envelope-img.open-img {
             opacity: 0;
-            transform: translateX(-50%) scale(0.5);
         }
 
-        .click-instruction {
-            margin-top: 35px;
-            font-size: 0.75rem;
+        .envelope-screen.opened .envelope-img.open-img {
+            opacity: 1;
+        }
+
+        .envelope-screen.opened .envelope-img.closed-img {
+            opacity: 0;
+        }
+
+        .click-text {
+            margin-top: 20px;
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1rem;
             letter-spacing: 2px;
-            text-transform: uppercase;
             color: var(--primary);
             font-weight: 600;
-            animation: bounce 1.5s infinite;
+            text-transform: uppercase;
+            animation: pulse 1.5s infinite;
         }
 
-        @keyframes bounce {
-            0%, 100% { transform: translateY(0); }
-            50% { transform: translateY(-5px); }
+        @keyframes pulse {
+            0%, 100% { opacity: 1; transform: scale(1); }
+            50% { opacity: 0.6; transform: scale(0.98); }
         }
 
-        /* ENCABEZADO Y CONTENIDO */
+        /* --- CONTENIDO PRINCIPAL --- */
         .hero {
             padding: 50px 20px 30px;
             text-align: center;
@@ -198,7 +163,6 @@
             width: 80%;
         }
 
-        /* SECCIONES Y TARJETAS */
         .countdown-container {
             padding: 25px 20px;
             text-align: center;
@@ -279,7 +243,6 @@
             margin-bottom: 18px;
         }
 
-        /* BOTONES */
         .btn {
             display: inline-flex;
             align-items: center;
@@ -343,16 +306,13 @@
 
     <div class="mobile-container">
         
-        <!-- PANTALLA INICIAL DEL SOBRE -->
+        <!-- PANTALLA SOBRE ANIMADO -->
         <div class="envelope-screen" id="envelopeScreen">
-            <h2 class="envelope-title">¡Nos casamos!</h2>
-            <div class="envelope-wrapper" id="envelope">
-                <div class="envelope-flap"></div>
-                <div class="wax-seal">
-                    <i class="fas fa-stamp"></i>
-                </div>
+            <div class="envelope-box">
+                <img src="sobre-cerrado.jpg" alt="Sobre Cerrado" class="envelope-img closed-img">
+                <img src="sobre-abierto.jpg" alt="Sobre Abierto" class="envelope-img open-img">
             </div>
-            <p class="click-instruction">Hacé click para abrir la invitación</p>
+            <p class="click-text" id="clickText">Toca para abrir la invitación</p>
         </div>
 
         <!-- REPRODUCTOR DE MÚSICA -->
@@ -363,7 +323,7 @@
             <source src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3" type="audio/mpeg">
         </audio>
 
-        <!-- ENCABEZADO PRINCIPAL -->
+        <!-- CONTENIDO DE LA INVITACIÓN -->
         <header class="hero">
             <div class="subtitle-top">¡Nos Casamos!</div>
             <h1 class="names">Kevin Rojas Laime</h1>
@@ -372,7 +332,6 @@
             <div class="date-badge">18 . 10 . 2026</div>
         </header>
 
-        <!-- CONTADOR REGRESIVO -->
         <div class="countdown-container">
             <div class="countdown-title">Faltan tan solo...</div>
             <div class="timer">
@@ -395,7 +354,6 @@
             </div>
         </div>
 
-        <!-- UBICACIÓN -->
         <div class="section-card">
             <i class="fas fa-church card-icon"></i>
             <h2 class="card-title">Ceremonia & Fiesta</h2>
@@ -409,7 +367,6 @@
             </a>
         </div>
 
-        <!-- AGENDAR FECHA -->
         <div class="section-card">
             <i class="far fa-calendar-check card-icon"></i>
             <h2 class="card-title">Agendar Fecha</h2>
@@ -419,7 +376,6 @@
             </a>
         </div>
 
-        <!-- RSVP WHATSAPP -->
         <div class="section-card">
             <i class="fab fa-whatsapp card-icon"></i>
             <h2 class="card-title">Confirmación de Asistencia</h2>
@@ -429,7 +385,6 @@
             </a>
         </div>
 
-        <!-- PIE DE PÁGINA -->
         <footer class="footer">
             <p>¡Esperamos compartir este día tan especial contigo!</p>
             <div class="footer-names">Kevin & Jhoselin</div>
@@ -438,25 +393,30 @@
     </div>
 
     <script>
-        // LÓGICA SOBRE ANIMADO
         const envelopeScreen = document.getElementById("envelopeScreen");
-        const envelope = document.getElementById("envelope");
+        const clickText = document.getElementById("clickText");
         const bgMusic = document.getElementById("bgMusic");
         const musicIcon = document.getElementById("musicIcon");
         const musicToggle = document.getElementById("musicToggle");
         let isPlaying = false;
 
         envelopeScreen.addEventListener("click", () => {
-            envelope.classList.add("open");
-            envelopeScreen.classList.add("open-screen");
-            
+            // 1. Cambia la imagen al sobre abierto
+            envelopeScreen.classList.add("opened");
+            clickText.style.opacity = "0";
+
+            // 2. Inicia la música
             bgMusic.play().then(() => {
                 isPlaying = true;
                 musicIcon.className = "fas fa-pause";
             }).catch(e => console.log("Audio autostart blocked"));
+
+            // 3. Transición a la página principal tras 800ms
+            setTimeout(() => {
+                envelopeScreen.classList.add("hide");
+            }, 800);
         });
 
-        // CONTROL DE MÚSICA
         musicToggle.addEventListener("click", (e) => {
             e.stopPropagation();
             if (isPlaying) {
@@ -469,7 +429,6 @@
             isPlaying = !isPlaying;
         });
 
-        // CONTADOR REGRESIVO
         const targetDate = new Date("October 18, 2026 17:00:00").getTime();
 
         function updateCountdown() {
