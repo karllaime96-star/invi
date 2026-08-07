@@ -168,17 +168,27 @@
             margin: -5px 0;
         }
 
-        /* 1. FOTO DE LOS CORDONES */
+        /* FOTO DE LA PAREJA (ILUSTRACIÓN) */
+        .couple-illustration {
+            width: 100%;
+            max-width: 320px;
+            border-radius: 15px;
+            margin: 20px auto 10px;
+            display: block;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.06);
+        }
+
+        /* FOTO DE LOS CORDONES */
         .cordon-header-img {
             width: 100%;
             max-width: 350px;
             border-radius: 12px;
-            margin: 20px auto 10px;
+            margin: 15px auto 10px;
             display: block;
             box-shadow: 0 4px 12px rgba(0,0,0,0.06);
         }
 
-        /* 2. RECUADRO PARA EL VERSÍCULO */
+        /* RECUADRO PARA EL VERSÍCULO */
         .verse-card {
             background-color: var(--card-bg);
             margin: 15px 20px;
@@ -205,7 +215,7 @@
             margin-top: 8px;
         }
 
-        /* 3 & 4. SECCIÓN DE PADRES E INVITACIÓN */
+        /* SECCIÓN DE PADRES E INVITACIÓN */
         .parents-section {
             padding: 10px 20px 20px;
             text-align: center;
@@ -229,7 +239,6 @@
             margin-bottom: 20px;
         }
 
-        /* 5. TEXTO DE LA INVITACIÓN */
         .invitation-text {
             font-size: 0.85rem;
             color: var(--text-muted);
@@ -237,7 +246,7 @@
             margin-bottom: 15px;
         }
 
-        /* 6. FECHA Y CONTADOR REGRESIVO */
+        /* FECHA Y CONTADOR REGRESIVO */
         .date-badge {
             margin: 25px auto 0;
             font-family: 'Cormorant Garamond', serif;
@@ -419,11 +428,14 @@
             <span class="ampersand fade-in-element delay-3">&</span>
             <h1 class="names fade-in-element delay-4">Jhoselin Ferrel Rioja</h1>
             
-            <!-- 1. FOTO DE LOS CORDONES ANTES DE LA FECHA -->
+            <!-- FOTO DE LA PAREJA (ILUSTRACIÓN) -->
+            <img src="casados.png" alt="Kevin y Jhoselin Ilustración" class="couple-illustration fade-in-element delay-4">
+
+            <!-- FOTO DE LOS CORDONES -->
             <img src="cordon.jpg" alt="Un cordón de tres dobleces" class="cordon-header-img fade-in-element delay-4">
         </header>
 
-        <!-- 2. RECUADRO CON EL VERSÍCULO DE MATEO 19:6 -->
+        <!-- RECUADRO CON EL VERSÍCULO DE MATEO 19:6 -->
         <div class="verse-card fade-in-element delay-4">
             <p class="bible-quote">
                 “Así que no son ya más dos, sino una sola carne; por tanto, lo que Dios juntó, no lo separe el hombre.”
@@ -431,18 +443,15 @@
             </p>
         </div>
 
-        <!-- 3, 4 & 5. BENDICIÓN, PADRES Y TEXTO DE LA INVITACIÓN -->
+        <!-- BENDICIÓN, PADRES Y TEXTO DE LA INVITACIÓN -->
         <section class="parents-section fade-in-element delay-4">
-            <!-- 3. FRASE EN NEGRITA CON MISMA LETRA QUE TÍTULOS -->
             <h2 class="blessing-title">Con la Bendición de Dios y de nuestros padres</h2>
 
-            <!-- 4. NOMBRES DE LOS PADRES REMARCADOS CON COLOR DE TÍTULO -->
             <div class="parents-names">
                 Limber Paredes Torrico y Jobita Laime Fernandez<br>
                 Liborio Ferrel Hinojosa y Máxima Rioja Jaldin
             </div>
 
-            <!-- 5. MENSAJE COMPLETO DE INVITACIÓN -->
             <p class="invitation-text">
                 tenemos el honor de invitarte a la celebración de nuestro enlace matrimonial.
             </p>
@@ -454,7 +463,7 @@
             </p>
         </section>
 
-        <!-- 6. FECHA 09 01 2027 Y CONTADOR REGRESIVO -->
+        <!-- FECHA 09 01 2027 Y CONTADOR REGRESIVO -->
         <div class="date-badge fade-in-element delay-4">09 . 01 . 2027</div>
 
         <div class="countdown-container fade-in-element delay-4">
@@ -545,7 +554,6 @@
             isPlaying = !isPlaying;
         });
 
-        // CONFIGURACIÓN DE LA FECHA: 09 de Enero de 2027 - 13:00 Hs
         const targetDate = new Date("January 9, 2027 13:00:00").getTime();
 
         function updateCountdown() {
