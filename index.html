@@ -240,24 +240,26 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            gap: 8px;
-            flex-wrap: wrap;
+            gap: 4px;
+            flex-wrap: nowrap; /* Evita que el texto baje a otra línea */
+            width: 100%;
         }
-
+        
         .parent-name {
             font-family: 'Cormorant Garamond', serif;
-            font-size: 1.1rem;
+            font-size: 0.88rem; /* Tamaño reducido para entrar en una sola línea */
             color: var(--primary);
             font-weight: 700;
             line-height: 1.2;
+            white-space: nowrap; /* Fuerza a mantener todo en una línea */
         }
-
+        
         .and-connector {
             font-family: 'Cormorant Garamond', serif;
-            font-size: 1.1rem;
+            font-size: 0.95rem;
             color: var(--accent);
             font-style: italic;
-            margin: 0 4px;
+            margin: 0 2px;
         }
 
         .invitation-text {
