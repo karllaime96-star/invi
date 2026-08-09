@@ -222,38 +222,42 @@
             font-size: 1.5rem;
             color: #000000;
             font-weight: 700;
-            margin-bottom: 15px;
+            margin-bottom: 20px;
             line-height: 1.3;
         }
 
+        /* --- PADRES EN FILAS --- */
         .parents-grid {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 10px;
-            align-items: start;
-            text-align: center;
-            margin-bottom: 20px;
-        }
-        
-        .parent-col {
             display: flex;
             flex-direction: column;
+            gap: 18px;
+            align-items: center;
+            text-align: center;
+            margin-bottom: 25px;
         }
-        
+
+        .parents-row {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            flex-wrap: wrap;
+        }
+
         .parent-name {
             font-family: 'Cormorant Garamond', serif;
-            font-size: 1.05rem;
+            font-size: 1.1rem;
             color: var(--primary);
             font-weight: 700;
             line-height: 1.2;
         }
-        
+
         .and-connector {
             font-family: 'Cormorant Garamond', serif;
             font-size: 1.1rem;
             color: var(--accent);
             font-style: italic;
-            margin: 4px 0;
+            margin: 0 4px;
         }
 
         .invitation-text {
@@ -263,7 +267,7 @@
             margin-bottom: 15px;
         }
 
-        /* --- NUEVO DISEÑO DE FECHA ELEGANTE --- */
+        /* --- DISEÑO DE FECHA ELEGANTE --- */
         .date-display-container {
             margin: 30px auto 10px;
             text-align: center;
@@ -412,34 +416,42 @@
             visibility: hidden;
         }
 
-        /* CORAZÓN EN EL DÍA 9 */
+        /* CORAZÓN CENTRADO EN EL DÍA 9 */
         .cal-date.special-day {
             color: var(--primary);
             font-weight: 700;
+            position: relative;
+            z-index: 2;
         }
 
         .special-day::before {
             content: '';
             position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
             width: 32px;
-            height: 30px;
-            background-color: transparent;
-            border: 1.5px solid var(--primary);
-            /* FORMA DE CORAZÓN CON MASK SVG */
-            clip-path: path('M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z');
-            background-color: var(--primary);
-            opacity: 0.15;
-            z-index: 1;
+            height: 32px;
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%234a5d4e' opacity='0.25'%3E%3Cpath d='M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z'/%3E%3C/svg%3E");
+            background-repeat: no-repeat;
+            background-position: center;
+            background-size: contain;
+            z-index: -1;
         }
 
         .special-day::after {
             content: '';
             position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
             width: 32px;
-            height: 30px;
-            border: 1.5px solid var(--primary);
-            clip-path: path('M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z');
-            z-index: 2;
+            height: 32px;
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%234a5d4e' stroke-width='1.5'%3E%3Cpath d='M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z'/%3E%3C/svg%3E");
+            background-repeat: no-repeat;
+            background-position: center;
+            background-size: contain;
+            z-index: -1;
         }
 
         .section-card {
@@ -567,10 +579,7 @@
             <span class="ampersand fade-in-element delay-3">&</span>
             <h1 class="names fade-in-element delay-4">Jhoselin Ferrel Rioja</h1>
             
-            <!-- FOTO DE LA PAREJA (ILUSTRACIÓN) -->
             <img src="casados.png" alt="Kevin y Jhoselin Ilustración" class="couple-illustration fade-in-element delay-4">
-
-            <!-- FOTO DE LOS CORDONES -->
             <img src="cordon.jpg" alt="Un cordón de tres dobleces" class="cordon-header-img fade-in-element delay-4">
         </header>
 
@@ -587,18 +596,16 @@
             <h2 class="blessing-title">Con la Bendición de Dios y de nuestros padres</h2>
 
             <div class="parents-grid">
-                <!-- COLUMNA IZQUIERDA (Familia Paredes - Laime) -->
-                <div class="parent-col">
-                    <div class="parent-name">Limber Paredes Torrico</div>
-                    <div class="and-connector">y</div>
-                    <div class="parent-name">Jobita Laime Fernandez</div>
+                <div class="parents-row">
+                    <span class="parent-name">Limber Paredes Torrico</span>
+                    <span class="and-connector">y</span>
+                    <span class="parent-name">Jobita Laime Fernandez</span>
                 </div>
                 
-                <!-- COLUMNA DERECHA (Familia Ferrel - Rioja) -->
-                <div class="parent-col">
-                    <div class="parent-name">Liborio Ferrel Hinojosa</div>
-                    <div class="and-connector">y</div>
-                    <div class="parent-name">Máxima Rioja Jaldin</div>
+                <div class="parents-row">
+                    <span class="parent-name">Liborio Ferrel Hinojosa</span>
+                    <span class="and-connector">y</span>
+                    <span class="parent-name">Máxima Rioja Jaldin</span>
                 </div>
             </div>
 
@@ -613,7 +620,7 @@
             </p>
         </section>
 
-        <!-- 1. NUEVA FECHA ESTILO EJEMPLO -->
+        <!-- FECHA ELEGANTE -->
         <div class="date-display-container fade-in-element delay-4">
             <div class="month-header">Enero</div>
             <div class="date-row">
@@ -623,7 +630,7 @@
             </div>
         </div>
 
-        <!-- 2. CONTADOR REGRESIVO -->
+        <!-- CONTADOR REGRESIVO -->
         <div class="countdown-container fade-in-element delay-4">
             <div class="countdown-title">Faltan tan solo...</div>
             <div class="timer">
@@ -646,7 +653,7 @@
             </div>
         </div>
 
-        <!-- 3. CALENDARIO ENERO 2027 CON CORAZÓN EN EL DÍA 9 -->
+        <!-- CALENDARIO ENERO 2027 CON CORAZÓN EN EL DÍA 9 -->
         <div class="calendar-card fade-in-element delay-4">
             <div class="calendar-title">El Gran Día</div>
             <div class="calendar-month">Enero 2027</div>
@@ -659,13 +666,11 @@
                 <div class="cal-day-head">Sáb</div>
                 <div class="cal-day-head">Dom</div>
 
-                <!-- Espacios vacíos antes de enero 2027 (inicia en Viernes) -->
                 <div class="cal-date empty"></div>
                 <div class="cal-date empty"></div>
                 <div class="cal-date empty"></div>
                 <div class="cal-date empty"></div>
                 
-                <!-- Días del mes -->
                 <div class="cal-date">1</div>
                 <div class="cal-date">2</div>
                 <div class="cal-date">3</div>
@@ -675,7 +680,6 @@
                 <div class="cal-date">7</div>
                 <div class="cal-date">8</div>
                 
-                <!-- DÍA 9 MARCADO CON EL CORAZÓN -->
                 <div class="cal-date special-day">9</div>
                 
                 <div class="cal-date">10</div>
@@ -769,7 +773,6 @@
             isPlaying = !isPlaying;
         });
 
-        // FECHA OBJETIVO: 9 DE ENERO DE 2027
         const targetDate = new Date("January 9, 2027 13:00:00").getTime();
 
         function updateCountdown() {
